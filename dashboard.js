@@ -189,32 +189,35 @@ document.getElementById('sorpresa-btn').addEventListener('click', function() {
 });
 
 
-// JavaScript
-const modal = document.getElementById('modal');
-const modalImg = document.getElementById('modal-img');
-const modalClose = document.getElementById('modal-close');
-
-document.querySelectorAll('.zoomable').forEach(img => {
-    img.addEventListener('click', () => {
-        modal.style.display = 'flex';
-        modalImg.src = img.src; // toma el tamaño original
-    });
-});
-
-modalClose.addEventListener('click', () => {
-    modal.style.display = 'none';
-});
-
-// Cerrar si hace clic fuera de la imagen
-modal.addEventListener('click', e => {
-    if (e.target === modal) modal.style.display = 'none';
-});
-
-
 
 document.addEventListener("click", () => {
       const audio = document.getElementById("sound");
       audio.play().catch(err => console.log("Bloqueado por navegador:", err));
     }, { once: true });
 
+
+
+
+
+    // Crear el lightbox una sola vez
+const lightbox = document.createElement('div');
+lightbox.id = 'lightbox';
+const lightboxImg = document.createElement('img');
+lightbox.appendChild(lightboxImg);
+document.body.appendChild(lightbox);
+
+// Abrir imagen al hacer click
+document.querySelectorAll('.zoomable').forEach(img => {
+    img.addEventListener('click', () => {
+        lightbox.style.display = 'flex';
+        lightboxImg.src = img.src;
+    });
+});
+
+// Cerrar al tocar fuera de la imagen
+lightbox.addEventListener('click', e => {
+    if (e.target !== lightboxImg) {
+        lightbox.style.display = 'none';
+    }
+});
 
