@@ -960,9 +960,10 @@ audio {
     padding: 1rem;
 }
 
-#lightbox img {
+#lightbox img,
+#lightbox video {
     max-width: 90%;
     max-height: 90%;
-    object-fit: contain;
     border-radius: 12px;
 }
+
