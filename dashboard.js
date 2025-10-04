@@ -199,25 +199,38 @@ document.addEventListener("click", () => {
 
 
 
-    // Crear el lightbox una sola vez
+// lightbox
 const lightbox = document.createElement('div');
 lightbox.id = 'lightbox';
-const lightboxImg = document.createElement('img');
-lightbox.appendChild(lightboxImg);
+const lightboxContent = document.createElement('div');
+lightbox.appendChild(lightboxContent);
 document.body.appendChild(lightbox);
 
-// Abrir imagen al hacer click
-document.querySelectorAll('.zoomable').forEach(img => {
-    img.addEventListener('click', () => {
+// Función para abrir lightbox
+document.querySelectorAll('.zoomable').forEach(el => {
+    el.addEventListener('click', () => {
+        lightboxContent.innerHTML = ''; // limpiar contenido anterior
+        let clone = el.cloneNode(true); // clonar imagen o video
+        clone.style.width = '100%';
+        clone.style.height = '100%';
+        clone.controls = true; // asegurar controles para videos
+        lightboxContent.appendChild(clone);
         lightbox.style.display = 'flex';
-        lightboxImg.src = img.src;
     });
 });
 
-// Cerrar al tocar fuera de la imagen
+// Cerrar al tocar fuera del contenido
 lightbox.addEventListener('click', e => {
-    if (e.target !== lightboxImg) {
+    if (e.target === lightbox) {
         lightbox.style.display = 'none';
+        // Pausar video si es video
+        const video = lightboxContent.querySelector('video');
+        if(video) video.pause();
     }
+});
+
+// Botón sorpresa: mostrar contenido
+document.getElementById('sorpresa-btn').addEventListener('click', () => {
+    document.getElementById('sorpresa-content').classList.remove('hidden');
 });
 
