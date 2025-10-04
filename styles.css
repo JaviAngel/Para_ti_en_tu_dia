@@ -654,6 +654,17 @@ main {
     opacity: 1;
 }
 
+@media (max-width: 768px) {
+    .collage-container {
+        grid-template-columns: 1fr; /* 1 columna en móvil */
+        gap: 15px; /* espacio un poco menor en móvil */
+    }
+
+    .collage-item img {
+        height: 200px; /* mismo tamaño fijo en móvil */
+    }
+}
+
 /* Estilos adicionales para modo oscuro */
 .dark-mode .collage-item {
     border-color: var(--color-border); /* Borde en modo oscuro */
@@ -923,6 +934,7 @@ audio {
     font-size: 2rem;
     cursor: pointer;
 }
+
 
 
 
