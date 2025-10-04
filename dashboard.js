@@ -182,11 +182,17 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// JavaScript para mostrar la sorpresa
-document.getElementById('sorpresa-btn').addEventListener('click', function() {
-    const contenido = document.getElementById('sorpresa-content');
-    contenido.classList.toggle('hidden'); // Muestra u oculta la sorpresa
+// Mostrar contenido al hacer click en el botón
+document.getElementById('sorpresa-btn').addEventListener('click', () => {
+    const content = document.getElementById('sorpresa-content');
+    content.classList.remove('hidden');
+    const video = document.getElementById('miVideo');
+    video.play(); // opcional: que comience a reproducirse automáticamente
 });
+
+
+
+
 
 
 
@@ -199,38 +205,24 @@ document.addEventListener("click", () => {
 
 
 
-// lightbox
+// Crear el lightbox una sola vez
 const lightbox = document.createElement('div');
 lightbox.id = 'lightbox';
-const lightboxContent = document.createElement('div');
-lightbox.appendChild(lightboxContent);
+const lightboxImg = document.createElement('img');
+lightbox.appendChild(lightboxImg);
 document.body.appendChild(lightbox);
 
-// Función para abrir lightbox
-document.querySelectorAll('.zoomable').forEach(el => {
-    el.addEventListener('click', () => {
-        lightboxContent.innerHTML = ''; // limpiar contenido anterior
-        let clone = el.cloneNode(true); // clonar imagen o video
-        clone.style.width = '100%';
-        clone.style.height = '100%';
-        clone.controls = true; // asegurar controles para videos
-        lightboxContent.appendChild(clone);
+// Abrir imagen al hacer click
+document.querySelectorAll('.zoomable').forEach(img => {
+    img.addEventListener('click', () => {
         lightbox.style.display = 'flex';
+        lightboxImg.src = img.src;
     });
 });
 
-// Cerrar al tocar fuera del contenido
+// Cerrar al tocar fuera de la imagen
 lightbox.addEventListener('click', e => {
-    if (e.target === lightbox) {
+    if (e.target !== lightboxImg) {
         lightbox.style.display = 'none';
-        // Pausar video si es video
-        const video = lightboxContent.querySelector('video');
-        if(video) video.pause();
     }
 });
-
-// Botón sorpresa: mostrar contenido
-document.getElementById('sorpresa-btn').addEventListener('click', () => {
-    document.getElementById('sorpresa-content').classList.remove('hidden');
-});
-
