@@ -617,9 +617,9 @@ main {
 }
 
 .collage-item {
-    width: 100%;      /* ocupa todo el ancho de la columna */
-    max-width: 300px; /* tamaño máximo de cada imagen */
-    height: 250px;    /* altura uniforme */
+    width: 100%;      
+    max-width: 300px; 
+    height: 250px;    
     overflow: hidden;
     border-radius: 12px;
     box-shadow: 0 6px 18px rgba(0,0,0,0.2);
@@ -629,7 +629,7 @@ main {
 .collage-item img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* mantiene proporción y recorta si es necesario */
+    object-fit: cover; 
     display: block;
 }
 
@@ -649,19 +649,24 @@ main {
     transition: opacity 0.3s ease;
 }
 
-
 .collage-item:hover .overlay {
     opacity: 1;
 }
 
+/* Modo móvil */
 @media (max-width: 768px) {
     .collage-container {
         grid-template-columns: 1fr; /* 1 columna en móvil */
-        gap: 15px; /* espacio un poco menor en móvil */
+        gap: 1rem; 
+    }
+
+    .collage-item {
+        height: 300px; /* más altura en móvil */
+        max-width: 100%; 
     }
 
     .collage-item img {
-        height: 200px; /* mismo tamaño fijo en móvil */
+        height: 100%; 
     }
 }
 
@@ -934,6 +939,7 @@ audio {
     font-size: 2rem;
     cursor: pointer;
 }
+
 
 
 
