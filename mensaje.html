@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Feliz Cumpleaños</title>
+  <style>
+    html {
+  -webkit-text-size-adjust: 100%; /* Safari, Chrome iOS */
+  -moz-text-size-adjust: 100%;    /* Firefox */
+  -ms-text-size-adjust: 100%;     /* IE */
+  text-size-adjust: 100%;         /* Estándar */
+}
+
+    body {
+      background: linear-gradient(to right, #cee9fa, #daf2f6);
+      font-family: 'Georgia', serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      overflow-y: auto; 
+    }
+
+    .corazones {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .corazon {
+      position: absolute;
+      color: #ff4d88;
+      font-size: 20px;
+      animation: flotar 8s linear infinite;
+    }
+
+    @keyframes flotar {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    .carta {
+      background: #fff0f5;
+      border-radius: 20px;
+      padding: 30px;
+      max-width: 700px;
+      margin: 80px auto;
+      box-shadow: 0 0 25px rgba(255, 105, 180, 0.4);
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      color: #c2185b;
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    #contenido {
+      font-size: 18px;
+      color: #5c0a29;
+      line-height: 1.5em;
+      white-space: pre-wrap;
+      text-align: left;
+      padding: 0 20px;
+    }
+
+    audio {
+      display: none;
+    }
+
+    .firma {
+      margin-top: 30px;
+        font-size: 20px;
+      font-weight: bold;
+      color: #a40055;
+    }
+.btn-volver {
+  margin-top: 15px; /* menos separación */
+  background: linear-gradient(135deg, #a0e3f9, #1b8699);
+  color: white;
+  font-size: 1.5em; 
+  font-weight: bold;
+  border: none;
+  border-radius: 25px; 
+  padding: 10px 20px;
+  cursor: pointer;
+  box-shadow: 0 5px 12px rgba(255, 77, 136, 0.4);
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-volver:hover {
+  background: linear-gradient(135deg, #20c2f4, #6e63e3);
+  transform: scale(1.05);
+}
+
+
+  </style>
+</head>
+<body>
+    <audio id="sound" 
+         src="img/me enamore .mp3" 
+         type="audio/mpeg" preload="auto"></audio>
+  <div class="corazones" id="corazones"></div>
+
+  <div class="carta">
+    <h1>Feliz cumpleaños, mi amor. <br> 
+        🎉🎂🎈</h1>
+    <div id="contenido"></div>
+    <div class="firma">Con todo mi amor</div>
+    <button class="btn-volver" onclick="window.location.href='dashboard.html'">
+        Volver a la página principal
+    </button>
+  </div>
+
+
+  <script>
+    // Efecto de máquina de escribir
+const texto = `Recuerda,  
+
+Hoy celebramos no solo tu cumpleaños,  
+sino también la dicha de tenerte en nuestras vidas.  
+
+Deseo que este día sea tan especial como lo eres tú para nosotros,  
+lleno de sonrisas, amor y alegría.  
+
+Eres un hombre increíble, un padre maravilloso  
+y el motivo de nuestra fortaleza y felicidad.  
+
+Tu hija y yo te amamos con todo nuestro corazón  
+y siempre estaremos a tu lado para compartir cada instante contigo. 💖`;
+
+
+
+    const contenido = document.getElementById("contenido");
+    let i = 0;
+    function escribir() {
+      if (i < texto.length) {
+        contenido.innerHTML += texto.charAt(i);
+        i++;
+        setTimeout(escribir, 40); // velocidad de escritura
+      }
+    }
+    escribir();
+
+    // Animar corazones flotantes
+    function crearCorazon() {
+      const corazon = document.createElement("div");
+      corazon.classList.add("corazon");
+      corazon.innerHTML = "💗";
+      corazon.style.left = Math.random() * 100 + "vw";
+      corazon.style.fontSize = (Math.random() * 20 + 10) + "px";
+      corazon.style.animationDuration = (Math.random() * 5 + 5) + "s";
+      document.getElementById("corazones").appendChild(corazon);
+      setTimeout(() => corazon.remove(), 8000);
+    }
+    setInterval(crearCorazon, 500);
+
+    document.addEventListener("click", () => {
+      const audio = document.getElementById("sound");
+      audio.play().catch(err => console.log("Bloqueado por navegador:", err));
+    }, { once: true });
+    
+  </script>
+
+</body>
+</html>
